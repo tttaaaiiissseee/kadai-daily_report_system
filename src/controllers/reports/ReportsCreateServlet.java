@@ -3,6 +3,8 @@ package controllers.reports;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -51,6 +53,45 @@ public class ReportsCreateServlet extends HttpServlet {
                 report_date = Date.valueOf(request.getParameter("report_date"));
             }
             r.setReport_date(report_date);
+
+
+            java.util.Date date = new java.util.Date();
+            String strDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
+            String attendance = request.getParameter("attendance_time");
+            String str = strDate + " " + attendance;
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+
+            java.util.Date date1 = null;
+            try {
+                date1 = sdf.parse(str);
+            } catch (ParseException e) {
+                // TODO 自動生成された catch ブロック
+                e.printStackTrace();
+            }
+            Timestamp ts = new Timestamp(date1.getTime());
+            r.setAttendance_time(ts);
+
+
+            java.util.Date date11 = new java.util.Date();
+            String strDate1 = new SimpleDateFormat("yyyy-MM-dd").format(date11);
+            String leave = request.getParameter("leave_time");
+            String str1 = strDate1 + " " + leave;
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+
+            java.util.Date date111 = null;
+            try {
+                date111 = sdf1.parse(str1);
+            } catch (ParseException e) {
+                // TODO 自動生成された catch ブロック
+                e.printStackTrace();
+            }
+            Timestamp ts1 = new Timestamp(date111.getTime());
+            r.setLeave_time(ts1);
+
+
+
 
             r.setTitle(request.getParameter("title"));
             r.setContent(request.getParameter("content"));
