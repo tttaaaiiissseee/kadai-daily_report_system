@@ -27,7 +27,7 @@
 <input type="time" name="leave_time" value="${report.leave_time }" />
 <br /><br />
 
-<label for="title">タイトル</label><br />
+<label for="title">タイトル </label><br />
 <input type="text" name="title" value="${report.title}" />
 <br /><br />
 
